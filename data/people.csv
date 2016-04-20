@@ -1,0 +1,3 @@
+personId:ID,name,:LABEL
+Alice,Alice,Person
+Fernando,Fernando,Person

@@ -1,0 +1,3 @@
+db:
+  url: http://database:password@username.something.graphenedb.com
+  port: port
