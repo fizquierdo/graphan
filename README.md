@@ -11,8 +11,6 @@ Edit __config_sample.yml__ and rename to  __config.yml__
 
 	ruby populate_db.rb
 
-### TODO
+### Launch Sinatra web app 
 
-* Sinatra API
-	- Add nodes
-	- Link nodes with relationship *knows*, *opposite_of*
+	ruby webapp.rb
