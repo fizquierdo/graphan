@@ -1,0 +1,35 @@
+
+# Following https://www.digitalocean.com/community/questions/how-can-i-deploy-a-sinatra-app
+
+# Deployment in digital ocean droplet
+# ssh root@digital_ocean_ip
+
+apt-get update
+apt-get install git
+apt-get install ruby ruby-dev build-essential
+apt-get install nginx
+
+# Graphan requirements
+gem install sinatra
+gem install neography
+
+# Clone  / pull repo for updates
+git clone https://github.com/fizquierdo/graphan.git
+#edit config.yml with the graphene DB info
+
+
+# Nginx config 
+#3.) Edit your nginx configuration file /etc/nginx/sites-enabled/default Something like the following should be used to replace the default Location / block:
+#
+#location / {
+#    proxy_pass       http://localhost:4567;
+#    proxy_set_header Host      $host;
+#    proxy_set_header X-Real-IP $remote_addr;
+#}
+
+# restart Sinatra app
+service nginx restart
+screen -S "graphan"
+ruby webapp.rb
+
+# Once it's up and running you can disconnect from the screen session by pressing **Ctrl+a" and then "d"
