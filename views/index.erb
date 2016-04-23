@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8' />
+		<title>Suffragist</title>
+		<link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+	</head>
+	<body class='container'>
+		<p> Words </p>
+
+		<table class='table table-hover table-striped'>
+			<thead>
+				<tr>
+					<th>Hanzi</th>
+					<th>Eng</th>
+					<th>Pinyin</th>
+				</tr>
+			</thead>
+			<% @words.each do |w| %>
+				<tbody>
+					<tr>
+						<td><%= w["hanzi"] %></td>
+						<td><%= w["eng"] %></td>
+						<td><%= w["pinyin"] %></td>
+					</tr>
+				</tbody>
+			<% end %>
+		</table>
+
+	</body>
+</html>
