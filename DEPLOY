@@ -13,7 +13,7 @@ apt-get install nginx
 gem install sinatra
 gem install neography
 
-# Clone  / pull repo for updates
+# Clone repo 
 git clone https://github.com/fizquierdo/graphan.git
 #edit config.yml with the graphene DB info
 
@@ -33,3 +33,8 @@ screen -S "graphan"
 ruby webapp.rb
 
 # Once it's up and running you can disconnect from the screen session by pressing **Ctrl+a" and then "d"
+
+#REDEPLOY
+git pull
+screen -r # to reattach if re-started of webapp.rb is needed
+service nginx restart
