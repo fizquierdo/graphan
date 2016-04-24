@@ -20,11 +20,12 @@ class GraphanServer
 		graph["data"].map{|d| d[0]["data"]}
 	end
 
-	def add_word(word)
+	def add_word(word, label=nil)
 		node = @neo.create_node(hanzi: word[:hanzi], 
 													 eng:		word[:eng], 
 													 pinyin:word[:pinyin])
 		@neo.add_label(node, "Word")
+		@neo.add_label(node, label) if label
 	end
 end
 
@@ -51,6 +52,6 @@ post '/addword' do
 	new_word = {hanzi: params["hanzi"],
 							pinyin: params["pinyin"],
 							eng: params["eng"]}
-	graphan.add_word new_word
+	graphan.add_word(new_word, params["label"])
 	redirect '/'
 end

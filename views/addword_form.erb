@@ -1,5 +1,5 @@
 <p>
-Enter a new Noun
+Enter a new Word
 </p>
 <form action="addword" method="POST">
 	Hanzi: <input type="text" name="hanzi">
@@ -8,6 +8,12 @@ Enter a new Noun
 	<br/>
 	Eng: <input type="text" name="eng">
 	<br/>
+
+	<select name="label">
+		<option value="Noun">Noun</option>  
+		<option value="Adjective">Adjective</option>  
+		<option value="Verb">Verb</option>
+	</select>
 
 	<input type="submit">
 </form>
