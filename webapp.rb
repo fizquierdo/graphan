@@ -55,3 +55,6 @@ post '/addword' do
 	graphan.add_word(new_word, params["label"])
 	redirect '/'
 end
+
+
+# TODO edit word to assign label (adj / noun) ?
