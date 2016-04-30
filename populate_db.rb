@@ -11,6 +11,7 @@ query = "MATCH (n)
 				 DELETE n,r"
 neo.execute_query(query)
 
+=begin
 # define some word nodes
 words = [ 
 	{hanzi: "老",		eng: "old",		pinyin: "lǎo", grammar: "Adjective"},
@@ -29,6 +30,15 @@ words.each do |word|
 	neo.add_label(node, word[:grammar])
 	created_words[word[:eng]] = node
 end
+=end
+
+# create word nodes 
+words =  CSV.read("data/hsk1.tsv", headers: true, skip_blanks: true, col_sep: "\t")
+words.each do |word|
+	w = Hash[words.headers.map{|item| [item.to_sym, word[item]] }]
+	node = neo.create_node w
+	%w(Word HSK1).each{|label| neo.add_label(node, label)}
+end
 
 # create people nodes (example on how to read from an existing csv)
 people =  CSV.read("data/people.csv", headers: true, skip_blanks: true)
@@ -40,6 +50,7 @@ people["name"].each do |name|
 	created_people[name] = node
 end
 
-# create knowledge relationships
-neo.create_relationship("knows", created_people["Fernando"], created_words["happy"])
-neo.create_relationship("knows", created_people["Fernando"], created_words["new"])
+## create knowledge relationships
+#neo.create_relationship("knows", created_people["Fernando"], created_words["happy"])
+#neo.create_relationship("knows", created_people["Fernando"], created_words["new"])
+
