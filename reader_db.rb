@@ -30,7 +30,3 @@ class GraphanServer
 		@neo.add_label(node, label) if label
 	end
 end
-
-# This bit works and shows the encoding correctly
-graphan = GraphanServer.new
-puts graphan.words.last["trad"]
