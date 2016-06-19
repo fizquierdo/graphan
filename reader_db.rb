@@ -26,21 +26,19 @@ class GraphanServer
 	def add_word(word, label=nil)
 		node = @neo.create_node(simp: word[:simp], 
 													 eng:		word[:eng], 
-													 pinyin: Pinyin.t(word["simp"], tonemarks: true))
+													 pinyin: Pinyin.t(word[:simp], tonemarks: true))
 		@neo.add_label(node, "Word")
 		@neo.add_label(node, label) if label
 	end
 end
 
+# Use grammar property to build random 'Pronoun + shi + Noun' examples
 =begin
-puts Pinyin.t('中国', tone: true)
-puts Pinyin.t('中国', tonemarks: true)
-
 graphan = GraphanServer.new
-words = graphan.words
-words.each do |word|
-	p Pinyin.t word["simp"], tonemarks: true
+words		= graphan.words
+pronouns= words.select{|w| w["grammar"] == "pronoun"}
+nouns		= words.select{|w| w["grammar"] == "noun"}
+5.times do 
+  puts "#{pronouns.shuffle.first["simp"]} 是 #{nouns.shuffle.first["simp"]}"
 end
 =end
-
-# select grammar label to build 'Pronoun + shi + Noun' examples
