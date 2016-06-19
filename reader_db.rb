@@ -2,6 +2,7 @@
 
 require 'yaml'
 require 'neography'
+require 'chinese_pinyin' 
 
 class GraphanServer
 	def initialize
@@ -25,8 +26,21 @@ class GraphanServer
 	def add_word(word, label=nil)
 		node = @neo.create_node(simp: word[:simp], 
 													 eng:		word[:eng], 
-													 pinyin:word[:pinyin])
+													 pinyin: Pinyin.t(word["simp"], tonemarks: true))
 		@neo.add_label(node, "Word")
 		@neo.add_label(node, label) if label
 	end
 end
+
+=begin
+puts Pinyin.t('中国', tone: true)
+puts Pinyin.t('中国', tonemarks: true)
+
+graphan = GraphanServer.new
+words = graphan.words
+words.each do |word|
+	p Pinyin.t word["simp"], tonemarks: true
+end
+=end
+
+# select grammar label to build 'Pronoun + shi + Noun' examples

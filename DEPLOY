@@ -12,6 +12,7 @@ apt-get install nginx
 # Graphan requirements
 gem install sinatra
 gem install neography
+gem install chinese_pinyin
 
 # Clone repo 
 git clone https://github.com/fizquierdo/graphan.git

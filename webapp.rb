@@ -21,7 +21,6 @@ end
 # When a new word is submitted, store it in Graphene DB
 post '/addword' do 
 	new_word = {simp: params["simp"],
-							pinyin: params["pinyin"],
 							eng: params["eng"]}
 	graphan.add_word(new_word, params["label"])
 	redirect '/'

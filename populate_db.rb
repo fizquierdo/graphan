@@ -1,6 +1,7 @@
 require "neography"
 require "yaml"
 require "csv"
+require 'chinese_pinyin' 
 
 cfg = YAML::load_file("config.yml")
 neo = Neography::Rest.new("#{cfg["db"]["url"]}:#{cfg["db"]["port"]}")
@@ -33,9 +34,10 @@ end
 =end
 
 # create word nodes 
-words =  CSV.read("data/hsk1.tsv", headers: true, skip_blanks: true, col_sep: "\t")
+words =  CSV.read("data/graphan.csv", headers: true, skip_blanks: true)
 words.each do |word|
 	w = Hash[words.headers.map{|item| [item.to_sym, word[item]] }]
+	w[:pinyin] = Pinyin.t word[:simp], tonemarks: true
 	node = neo.create_node w
 	%w(Word HSK1).each{|label| neo.add_label(node, label)}
 end
