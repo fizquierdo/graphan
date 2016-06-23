@@ -49,7 +49,7 @@ class GraphanServer
 		pronouns = self.valid_pronouns_for_Shi
 		examples = []
 		num_examples.times do 
-			examples << build_shi_pattern(nouns, pronouns)
+			examples << build_shi_pattern(pronouns, nouns)
 		end
 		[examples, nouns, pronouns]
 	end
