@@ -38,4 +38,5 @@ ruby webapp.rb
 #REDEPLOY
 git pull
 screen -r # to reattach if re-started of webapp.rb is needed
-service nginx restart
+# restart Sintra app (see above)
+
