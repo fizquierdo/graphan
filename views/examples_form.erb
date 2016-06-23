@@ -1,0 +1,23 @@
+<p>
+	Pattern S+V+O: Pronoun + 是 + Noun
+</p>
+<p>
+	Nouns: <%= @nouns.join(', ') %>
+</p>
+<p>
+	Pronouns: <%= @pronouns.join(', ') %>
+</p>
+<table class='table table-hover table-striped'>
+	<thead>
+		<tr>
+			<th>Examples</th>
+		</tr>
+	</thead>
+	<% @examples.each do |example| %>
+		<tbody>
+			<tr>
+				<td><%= example %></td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>

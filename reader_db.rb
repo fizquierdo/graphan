@@ -22,7 +22,6 @@ class GraphanServer
 		graph = @neo.execute_query(cypher)
 		graph["data"].map{|d| d[0]["data"]}
 	end
-
 	def add_word(word, label=nil)
 		node = @neo.create_node(simp: word[:simp], 
 													 eng:		word[:eng], 
@@ -30,15 +29,22 @@ class GraphanServer
 		@neo.add_label(node, "Word")
 		@neo.add_label(node, label) if label
 	end
-end
+	def generate_examples(num_examples=1)
+		nouns = get_words("noun")
+		pronouns = get_words("pronoun")
+		examples = []
+		num_examples.times do 
+			examples << build_shi_pattern(nouns, pronouns)
+		end
+		[examples, nouns, pronouns]
+	end
 
-# Use grammar property to build random 'Pronoun + shi + Noun' examples
-=begin
-graphan = GraphanServer.new
-words		= graphan.words
-pronouns= words.select{|w| w["grammar"] == "pronoun"}
-nouns		= words.select{|w| w["grammar"] == "noun"}
-5.times do 
-  puts "#{pronouns.shuffle.first["simp"]} 是 #{nouns.shuffle.first["simp"]}"
+	private
+	def get_words(grammar_category)
+		self.words.select{|w| w["grammar"] == grammar_category}.map{|w| w["simp"]}
+	end
+
+	def build_shi_pattern(pronouns, nouns)
+		pronouns.shuffle.first + "是" + nouns.shuffle.first
+	end
 end
-=end

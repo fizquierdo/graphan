@@ -18,6 +18,11 @@ get '/addword' do
 	erb :addword_form
 end
 
+get '/examples' do 
+	@examples, @nouns, @pronouns = graphan.generate_examples(5)
+	erb :examples_form
+end
+
 # When a new word is submitted, store it in Graphene DB
 post '/addword' do 
 	new_word = {simp: params["simp"],
