@@ -9,19 +9,32 @@ class GraphanServer
 		cfg = YAML::load_file("config.yml")
 		@neo = Neography::Rest.new("#{cfg["db"]["url"]}:#{cfg["db"]["port"]}")
 	end
+
+	# Readers
 	def words
 		# Return all nodes with label Word
-		cypher = "MATCH (n:Word) RETURN n"
-		graph = @neo.execute_query(cypher)
-		graph["data"].map{|d| d[0]["data"]}
-		# seems to pass the right format but the view does not
+		cypher = "MATCH (n:Word) 
+							RETURN n"
+		data = run_query(cypher)
+		data
+	end
+	def valid_pronouns_for_Shi
+		# Return pronouns with valid_pronouns relation to Shi pattern
+		cypher = "MATCH (n:Word{grammar: 'pronoun'})-[r:valid_pronoun]->
+										(p:Pattern{name: 'Shi'}) 
+							RETURN n"
+		data = run_query(cypher)
+		data.map{|w| w["simp"]}
 	end
 	def people
 		# Return all nodes with label Person
-		cypher = "MATCH (n:Person) RETURN n"
-		graph = @neo.execute_query(cypher)
-		graph["data"].map{|d| d[0]["data"]}
+		cypher = "MATCH (n:Person) 
+							RETURN n"
+		data = run_query(cypher)
+		data
 	end
+
+	# Writers
 	def add_word(word, label=nil)
 		node = @neo.create_node(simp: word[:simp], 
 													 eng:		word[:eng], 
@@ -29,9 +42,11 @@ class GraphanServer
 		@neo.add_label(node, "Word")
 		@neo.add_label(node, label) if label
 	end
+
+	# Transformers
 	def generate_examples(num_examples=1)
 		nouns = get_words("noun")
-		pronouns = get_words("pronoun")
+		pronouns = self.valid_pronouns_for_Shi
 		examples = []
 		num_examples.times do 
 			examples << build_shi_pattern(nouns, pronouns)
@@ -40,6 +55,10 @@ class GraphanServer
 	end
 
 	private
+	def run_query(cypher)
+		graph = @neo.execute_query(cypher)
+		graph["data"].map{|d| d[0]["data"]}
+	end
 	def get_words(grammar_category)
 		self.words.select{|w| w["grammar"] == grammar_category}.map{|w| w["simp"]}
 	end
