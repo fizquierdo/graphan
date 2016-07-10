@@ -6,11 +6,16 @@ load 'reader_db.rb'
 graphan = GraphanServer.new
 
 get '/' do 
+	# TODO real login, for now we work with a single user
+	@username = "Fernando"
 	erb :index
 end
 
 get '/vocab' do 
-	@words = graphan.words
+	# TODO initialize words as doesnt-know, then tag them as learning or knows via relationship with user?
+	@username = "Fernando"
+	@learning_words = graphan.words_selection(@username, "learning")
+	@known_words = graphan.words_selection(@username, "KNOWS")
 	erb :vocab
 end
 
@@ -34,4 +39,9 @@ end
 
 get '/people' do 
 	"Graphan members: #{graphan.people} members"
+end
+
+post '/known_word' do
+	graphan.add_known_relationship("Fernando", params["simp"])
+	redirect '/vocab'
 end

@@ -18,6 +18,20 @@ class GraphanServer
 		data = run_query(cypher)
 		data
 	end
+
+	def words_selection(username, relationship)
+		cypher = "MATCH (u:Person {name:'#{username}'})-[:#{relationship}]->(w:Word) 
+		          RETURN w"
+		data = run_query(cypher)
+		data
+	end
+	def add_known_relationship(username, simp)
+		cypher = "MATCH (u:Person {name:'#{username}'}), (w:Word {simp:'#{simp}'})
+							CREATE (u)-[:KNOWS]->(w)"
+		data = run_query(cypher)
+		data
+	end
+
 	def valid_pronouns_for_Shi
 		# Return pronouns with valid_pronouns relation to Shi pattern
 		cypher = "MATCH (n:Word{grammar: 'pronoun'})-[r:valid_pronoun]->

@@ -1,18 +1,44 @@
 <% #encoding: UTF-8	%>
+<h2>Known Words</h2>
+<table class='table'>
+	<thead>
+		<tr>
+			<th>Simp</th>
+			<th>Pinyin</th>
+		</tr>
+	</thead>
+	<% @known_words.each do |w| %>
+		<tbody>
+			<tr>
+				<td><%= w["simp"] %></td>
+				<td><%= w["pinyin"] %></td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>
+
+<h2>Learning Words</h2>
 <table class='table table-hover table-striped'>
 	<thead>
 		<tr>
 			<th>Simp</th>
 			<th>Pinyin</th>
 			<th>Eng</th>
+			<th>Known?</th>
 		</tr>
 	</thead>
-	<% @words.each do |w| %>
+	<% @learning_words.each do |w| %>
 		<tbody>
 			<tr>
 				<td><%= w["simp"] %></td>
 				<td><%= w["pinyin"] %></td>
 				<td><%= w["eng"] %></td>
+				<td>
+					<form action="known_word" method="POST">
+						<input type="hidden" name="simp" value="<%= w["simp"] %>">
+						<input type="submit" class="btn btn-default" value="I know this word">
+					</form>
+				</td>
 			</tr>
 		</tbody>
 	<% end %>

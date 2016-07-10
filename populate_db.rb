@@ -50,6 +50,7 @@ end
 	neo.create_relationship("valid_pronoun", created_words[simp], created_patterns["Shi"])
 end
 
-## create knowledge relationships (should be in sinatra)
-#neo.create_relationship("knows", created_people["Fernando"], created_words["happy"])
-#neo.create_relationship("knows", created_people["Fernando"], created_words["new"])
+## create default knowledge relationships (might be different for each user/learning-mode)
+created_words.each_pair do |word_simp, word_node| 
+	neo.create_relationship("learning", created_people["Fernando"], word_node)
+end

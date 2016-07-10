@@ -7,3 +7,5 @@ examples, nouns, pronouns = graphan.generate_examples(5)
 p examples
 p nouns
 p pronouns
+
+p graphan.words_learning("Fernando")
