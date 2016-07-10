@@ -3,9 +3,18 @@
 	<head>
 		<meta charset='UTF-8' />
 		<title>Graphan</title>
-		<link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+		<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' />
 	</head>
 	<body class='container'>
+		<div>
+			<ul class="nav nav-pills">
+				<li><a href="/"					>Home</a></li>
+				<li><a href="/vocab"    >Vocab</a></li>
+				<li><a href="/addword"  >Add word</a></li>
+				<li><a href="/examples" >Examples</a></li>
+				<li><a href="/people"   >People</a></li>
+			</ul>
+		</div>
 		<%= yield %>
 	</body>
 </html>

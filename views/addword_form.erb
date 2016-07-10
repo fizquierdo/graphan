@@ -1,16 +1,26 @@
 <p>
 Enter a new Word
 </p>
-<form action="addword" method="POST">
-	Hanzi: <input type="text" name="simp">
-	<br/>
-	Eng: <input type="text" name="eng">
-	<br/>
+<form action="addword" method="POST" class="form" role="form">
 
-	<select name="label">
-		<option value="Label1">Label1</option>  
-		<option value="Label2">Label2</option>  
-	</select>
+	<div class="form-group">
+		<label for="simp">Hanzi</label>
+		<input type="text" class="form-control" name="simp" id="simp">
+	</div>
 
-	<input type="submit">
+	<div class="form-group">
+		<label for="eng">Eng</label>
+		<input type="text" class="form-control" name="eng" id="eng">
+	</div>
+
+	<div class="form-group">
+		<label for="sel">Label</label>
+		<select class="form-control" name="sel" id="sel">
+			<option>Label1</option>  
+			<option>Label2</option>  
+		</select>
+	</div>
+
+
+	<input type="submit" class="btn btn-default">
 </form>

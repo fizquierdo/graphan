@@ -1,0 +1,19 @@
+<% #encoding: UTF-8	%>
+<table class='table table-hover table-striped'>
+	<thead>
+		<tr>
+			<th>Simp</th>
+			<th>Pinyin</th>
+			<th>Eng</th>
+		</tr>
+	</thead>
+	<% @words.each do |w| %>
+		<tbody>
+			<tr>
+				<td><%= w["simp"] %></td>
+				<td><%= w["pinyin"] %></td>
+				<td><%= w["eng"] %></td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>

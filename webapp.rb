@@ -6,27 +6,32 @@ load 'reader_db.rb'
 graphan = GraphanServer.new
 
 get '/' do 
-	@words = graphan.words
 	erb :index
 end
 
-get '/people' do 
-	"Graphan members: #{graphan.people} members"
+get '/vocab' do 
+	@words = graphan.words
+	erb :vocab
 end
 
 get '/addword' do 
 	erb :addword_form
 end
 
-get '/examples' do 
-	@examples, @nouns, @pronouns = graphan.generate_examples(5)
-	erb :examples_form
-end
-
 # When a new word is submitted, store it in Graphene DB
 post '/addword' do 
-	new_word = {simp: params["simp"],
-							eng: params["eng"]}
-	graphan.add_word(new_word, params["label"])
+	new_word = {simp: params["simp"], eng: params["eng"]}
+	label    = params["sel"]
+	#"new word #{new_word} #{label}"
+	graphan.add_word(new_word, label)
 	redirect '/'
+end
+
+get '/examples' do 
+	@examples, @nouns, @pronouns = graphan.generate_examples(5)
+	erb :examples
+end
+
+get '/people' do 
+	"Graphan members: #{graphan.people} members"
 end
