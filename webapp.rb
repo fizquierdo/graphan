@@ -14,7 +14,7 @@ end
 get '/vocab' do 
 	# TODO initialize words as doesnt-know, then tag them as learning or knows via relationship with user?
 	@username = "Fernando"
-	@learning_words = graphan.words_selection(@username, "learning")
+	@learning_words = graphan.words_selection(@username, "LEARNS")
 	@known_words = graphan.words_selection(@username, "KNOWS")
 	erb :vocab
 end

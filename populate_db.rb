@@ -52,5 +52,5 @@ end
 
 ## create default knowledge relationships (might be different for each user/learning-mode)
 created_words.each_pair do |word_simp, word_node| 
-	neo.create_relationship("learning", created_people["Fernando"], word_node)
+	neo.create_relationship("LEARNS", created_people["Fernando"], word_node)
 end

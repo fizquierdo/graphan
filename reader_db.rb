@@ -26,6 +26,9 @@ class GraphanServer
 		data
 	end
 	def add_known_relationship(username, simp)
+		cypher = "MATCH (:Person {name:'#{username}'})-[r:LEARNS]->(w:Word{simp:'#{simp}'}) 
+		          DELETE r"
+		data = run_query(cypher)
 		cypher = "MATCH (u:Person {name:'#{username}'}), (w:Word {simp:'#{simp}'})
 							CREATE (u)-[:KNOWS]->(w)"
 		data = run_query(cypher)
