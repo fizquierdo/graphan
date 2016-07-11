@@ -1,0 +1,20 @@
+<% #encoding: UTF-8	%>
+<table class='table'>
+	<thead>
+		<tr>
+			<th>Count</th>
+			<th>Tone</th>
+			<th>Words</th>
+		</tr>
+	</thead>
+	<% @triplets.each do |triplet| %>
+		<% num, words, tone = triplet %>
+		<tbody>
+			<tr>
+				<td><%= num %></td>
+				<td><%= tone %></td>
+				<td><%= words.join(' ') %></td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>

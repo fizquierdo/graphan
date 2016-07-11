@@ -51,6 +51,14 @@ class GraphanServer
 		data
 	end
 
+	def words_grouped_by_tones
+		cypher = "MATCH (w:Word)-[:HAS_TONE]->(n:ToneCombo) 
+							RETURN count(w.simp) AS num, collect(w.simp) AS words, n.tone 
+							ORDER BY num"
+		graph = @neo.execute_query(cypher)
+		graph["data"]
+	end
+
 	# Writers
 	def add_word(word, label=nil)
 		node = @neo.create_node(simp: word[:simp], 

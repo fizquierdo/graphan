@@ -41,6 +41,11 @@ get '/people' do
 	"Graphan members: #{graphan.people} members"
 end
 
+get '/tonelist' do 
+	@triplets = graphan.words_grouped_by_tones
+	erb :tonelist
+end
+
 post '/known_word' do
 	graphan.add_known_relationship("Fernando", params["simp"])
 	redirect '/vocab'
