@@ -59,6 +59,13 @@ class GraphanServer
 		graph["data"]
 	end
 
+	def grammar_points
+		cypher = "MATCH (g)<-[:IS_ABOUT]-(n:GrammarPoint)-[r:CATEGORIZED_AS]->(c) 
+							RETURN n.level, n.pattern, n.link, n.eng, n.example, g.name, c.name"
+		graph = @neo.execute_query(cypher)
+		graph["data"]
+	end
+
 	# Writers
 	def add_word(word, label=nil)
 		node = @neo.create_node(simp: word[:simp], 

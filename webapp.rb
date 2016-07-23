@@ -46,6 +46,11 @@ get '/tonelist' do
 	erb :tonelist
 end
 
+get '/grammar' do 
+	@grammar_points = graphan.grammar_points
+	erb :grammar
+end
+
 post '/known_word' do
 	graphan.add_known_relationship("Fernando", params["simp"])
 	redirect '/vocab'

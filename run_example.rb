@@ -11,3 +11,8 @@ graphan.words_grouped_by_tones.each do |triplet|
 	num, words, tone = triplet
 	puts "#{num}\t#{tone}\t#{words.join(' ')}"
 end
+
+graphan.grammar_points.each do |gp|
+	p gp
+	# n.level, n.pattern, n.link, n.eng, n.example, g.name, c.name
+end

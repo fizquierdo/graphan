@@ -1,0 +1,30 @@
+<% #encoding: UTF-8	%>
+<table class='table'>
+	<thead>
+		<tr>
+			<th>Level</th>
+			<th>Pattern</th>
+			<th>Eng</th>
+			<th>Example</th>
+			<th>Grammar</th>
+			<th>Category</th>
+		</tr>
+	</thead>
+	<% @grammar_points.each do |gp| %>
+		<% level, pattern, link, eng, example, grammar, category = gp %>
+		<tbody>
+			<tr>
+				<td><%= level %></td>
+				<td>
+					<a href='<%= link %>'>
+						<%= pattern %>
+					</a>
+				</td>
+				<td><%= eng %></td>
+				<td><%= example %></td>
+				<td><%= grammar %></td>
+				<td><%= category %></td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>
