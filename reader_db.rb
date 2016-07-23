@@ -65,6 +65,26 @@ class GraphanServer
 		graph = @neo.execute_query(cypher)
 		graph["data"]
 	end
+	def grammar_points_and_types
+		gps = self.grammar_points
+
+		levels_counter = Hash.new(0)
+		levels = gps.map{|gp| gp[0]}
+		levels.each{|l| levels_counter[l]+=1}
+
+		g_classes_counter = {}
+		g_classes = gps.map{|gp| gp[5]}
+		g_classes.uniq.each do |g_class|
+			g_classes_counter[g_class] = {}
+			levels.each {|level| g_classes_counter[g_class][level] = 0}
+		end
+		gps.each do |gp|
+			level = gp[0]
+			g_class = gp[5]
+			g_classes_counter[g_class][level] += 1
+		end
+		[gps, levels_counter, g_classes_counter]
+	end
 
 	# Writers
 	def add_word(word, label=nil)

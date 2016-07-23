@@ -47,7 +47,14 @@ get '/tonelist' do
 end
 
 get '/grammar' do 
-	@grammar_points = graphan.grammar_points
+	@grammar_points, @levels, @grammar_types = graphan.grammar_points_and_types
+	erb :grammar
+end
+
+post '/grammar_filter' do 
+	@grammar_points, @levels, @grammar_types = graphan.grammar_points_and_types(params)
+	# TODO selection should be done within graphan (passing params)
+	@grammar_points = @grammar_points.select{|gp| gp[0] == params["selLevel"] and gp[5] == params["selGrammar"]}
 	erb :grammar
 end
 
